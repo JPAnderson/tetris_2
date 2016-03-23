@@ -83,10 +83,12 @@
 		pen.clearRect(0, 0, canvas.width, canvas.height)
 		drawLongBlock();
 		drawGrid();
-		y = y + bSize;
-		if(rightDown){
+		if(y + bSize*4 < canvas.height){
+			y = y + bSize;
+		}
+		if(rightDown && x < canvas.width - bSize){
 			x = x + bSize;
-		}else if(leftDown){
+		}else if(leftDown && x > 0){
 			x = x - bSize;
 		}
 	}
@@ -109,7 +111,7 @@
 		}
 	}
 	
-	setInterval(run, 500);
+	setInterval(run, 200);
 	
 	
 </script>
