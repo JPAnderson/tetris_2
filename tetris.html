@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tetris</title>
+	</head>
+<body>
+<canvas id="mainCanvas" width="300" height="450" style="border:1px solid"></canvas>
+<script>
+	var canvas = document.getElementById("mainCanvas");
+	var pen = canvas.getContext("2d");
+	var screenWidth = canvas.width;
+	var screenHeight = canvas.height;
+	var bSize = screenWidth/10;
+	var y = bSize;
+	var leftDown = false;
+	var rightDown = false;
+	var x = bSize;
+	
+	
+	
+	function drawGrid(){
+		for(i = 0; i < screenWidth; i = i + bSize){
+			pen.moveTo(i, 0);
+			pen.lineTo(i, screenHeight);
+			pen.stroke();
+		}
+		
+		for(i = 0; i < screenHeight; i = i + bSize){
+			pen.moveTo(0, i);
+			pen.lineTo(screenWidth, i);
+			pen.stroke();
+		}
+	}
+	
+	function drawFourBlock(){
+		pen.fillStyle = "#00ff00";
+		pen.rect(0, 0, (screenWidth/10)*2, (screenWidth/10*2));
+		pen.fill();
+	}
+	
+	function drawLongBlock(){
+		pen.fillStyle = "#0000ff";
+		pen.beginPath()
+		pen.rect(x, y, screenWidth/10, (screenWidth/10)*4);
+		pen.fill();
+		pen.closePath();
+	}
+	
+	function drawRightShiftBlock(){
+		pen.fillStyle = "#ff0000";
+		pen.rect(0,0, screenWidth/10, (screenWidth/10)*2);
+		pen.fill();
+		pen.rect(screenWidth/10, screenWidth/10, screenWidth/10, (screenWidth/10)*2);
+		pen.fill();
+	}
+	
+	function drawLeftShiftBlock(){
+		pen.fillStyle = "#ff0000";
+		pen.beginPath();
+		pen.rect(bSize,y, bSize, bSize*2 );
+		pen.fill();
+		pen.rect(y, bSize, bSize, bSize*2);
+		pen.fill();
+		pen.endPath();
+	}
+	
+	function drawTBlock(){
+		pen.fillStyle = "#0000ff";
+		pen.rect(bSize, 0, bSize, bSize);
+		pen.fill();
+		pen.rect(0, bSize, bSize*3, bSize);
+		pen.fill();
+	}
+	function drawLeftBlock(){
+		pen.fillStyle = "#ffff00";
+		pen.beginPath
+		pen.rect(0, y, bSize, bSize);
+		pen.fill();
+		pen.endPath();
+		
+	}
+	function run(){
+		pen.clearRect(0, 0, canvas.width, canvas.height)
+		drawLongBlock();
+		drawGrid();
+		y = y + bSize;
+		if(rightDown){
+			x = x + bSize;
+		}else if(leftDown){
+			x = x - bSize;
+		}
+	}
+	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+	
+	function keyDownHandler(e){
+		if(e.keyCode == 39){
+			rightDown = true;
+		}else if(e.keyCode == 37){
+			leftDown = true;
+		}
+	}
+	
+	function keyUpHandler(e){
+		if(e.keyCode == 39){
+			rightDown = false;
+		} else if(e.keyCode == 37){
+			leftDown = false;
+		}
+	}
+	
+	setInterval(run, 500);
+	
+	
+</script>
+
+</body>
+</html>
