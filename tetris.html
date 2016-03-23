@@ -14,7 +14,10 @@
 	var y = bSize;
 	var leftDown = false;
 	var rightDown = false;
-	var x = bSize;
+	var x = bSize; 
+	var blockPick;
+	var blocks = ["TBlock", "leftShiftBlock", "rightShiftBlock, fourBlock, longBlock"];
+	var block;
 	
 	
 	
@@ -32,10 +35,22 @@
 		}
 	}
 	
+	function blockCreate(){
+		blockPick = Math.floor((Math.random() * 5) + 1);
+		block = blocks[blockPick];
+		switch(block){
+			case "TBlock":
+				
+		}
+		
+	}
+	
 	function drawFourBlock(){
 		pen.fillStyle = "#00ff00";
+		pen.beginPath
 		pen.rect(0, 0, (screenWidth/10)*2, (screenWidth/10*2));
 		pen.fill();
+		pen.closePath();
 	}
 	
 	function drawLongBlock(){
@@ -48,10 +63,12 @@
 	
 	function drawRightShiftBlock(){
 		pen.fillStyle = "#ff0000";
+		pen.beginPath
 		pen.rect(0,0, screenWidth/10, (screenWidth/10)*2);
 		pen.fill();
 		pen.rect(screenWidth/10, screenWidth/10, screenWidth/10, (screenWidth/10)*2);
 		pen.fill();
+		pen.closePath();
 	}
 	
 	function drawLeftShiftBlock(){
@@ -61,24 +78,28 @@
 		pen.fill();
 		pen.rect(y, bSize, bSize, bSize*2);
 		pen.fill();
-		pen.endPath();
+		pen.closePath();
 	}
 	
 	function drawTBlock(){
 		pen.fillStyle = "#0000ff";
+		pen.beginPath
 		pen.rect(bSize, 0, bSize, bSize);
 		pen.fill();
 		pen.rect(0, bSize, bSize*3, bSize);
 		pen.fill();
+		pen.closePath();
 	}
+	
 	function drawLeftBlock(){
 		pen.fillStyle = "#ffff00";
 		pen.beginPath
 		pen.rect(0, y, bSize, bSize);
 		pen.fill();
-		pen.endPath();
+		pen.closePath();
 		
 	}
+	
 	function run(){
 		pen.clearRect(0, 0, canvas.width, canvas.height)
 		drawLongBlock();
